@@ -1,0 +1,43 @@
+{
+  "name": "keep-desktop",
+  "productName": "Keep",
+  "version": "0.1.1",
+  "description": "Desktop App for Google Keep",
+  "electronVersion": "0.36.0",
+  "files": [
+    "*.js",
+    "assets"
+  ],
+  "scripts": {
+    "start": "electron .",
+    "build": "npm run build:macos && npm run build:linux && npm run build:windows",
+    "build:macos": "electron-packager . --overwrite --asar --out=dist --ignore='^/(dist|assets)$' --platform=darwin --arch=x64 --icon=assets/icon.icns --app-bundle-id=com.n1z.keep && cd dist/Keep-darwin-x64 && zip -ryXq9 ../Keep-macos-${npm_package_version}.zip Keep.app",
+    "build:linux": "electron-packager . --overwrite --out=dist --ignore='^/(dist|assets)$' --platform=linux --arch=x64 --icon=assets/icon.png --app-bundle-id=com.n1z.keep && cd dist/Keep-linux-x64 && zip -ryq9 ../Keep-linux-${npm_package_version}.zip *",
+    "build:windows": "electron-packager . --overwrite --asar --out=dist --ignore='^/(dist|assets)$' --platform=win32 --arch=ia32 --icon=assets/icon.ico --version-string.ProductName=$npm_package_productName && cd dist/Keep-win32-ia32 && zip -ryq9 ../Keep-windows-${npm_package_version}.zip *",
+    "test": "eslint ."
+  },
+  "repository": {},
+  "keywords": [
+    "electron-app",
+    "electron",
+    "google",
+    "keep"
+  ],
+  "author": "joaaoleite",
+  "license": "Unlicense",
+  "bugs": {
+    "url": "https://github.com/joaaoleite/keep-desktop/issues"
+  },
+  "homepage": "https://github.com/joaaoleite/keep-desktop",
+  "dependencies": {
+    "electron-config": "^0.2.1",
+    "electron-debug": "^1.0.1"
+  },
+  "devDependencies": {
+    "electron": "^1.4.4",
+    "electron-packager": "^8.1.0",
+    "eslint": "^3.4.0",
+    "eslint-config-airbnb-base": "^5.0.3",
+    "eslint-plugin-import": "^1.14.0"
+  }
+}
